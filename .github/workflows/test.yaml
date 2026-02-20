@@ -1,0 +1,25 @@
+name: Debug PR github.ref
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  pull_request_target:
+    types: [opened, reopened, synchronize, closed]
+  pull_request_review:
+  pull_request_review_comment:
+  issue_comment:
+    types: [ opened, closed ]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print core context values
+        run: |
+          echo "event_name: ${{ github.event_name }}"
+          echo "event_action: ${{ github.event.action }}"
+          echo "github.ref: ${{ github.ref }}"
+          echo "github.head_ref: ${{ github.head_ref }}"
+          echo "github.base_ref: ${{ github.base_ref }}"
+          echo "github.sha: ${{ github.sha }}"
+          echo "PR merged?: ${{ github.event.pull_request.merged }}"
